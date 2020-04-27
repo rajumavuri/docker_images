@@ -29,9 +29,9 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
+RUN mkdir -p /usr/src/app && chown jenkins /usr/src/app
 
-USER docker
+USER jenkins
 
 # Install RVM
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
@@ -51,4 +51,4 @@ ENV RUBY_VERSION ${ruby_version}
 RUN rvm install $RUBY_VERSION
 
 # Set it back to USER jenkins - so we can use it as a Jenkins Slave
-USER jenkins
+
