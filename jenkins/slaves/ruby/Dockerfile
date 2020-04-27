@@ -41,14 +41,9 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
  && echo 'bundler' >> /home/jenkins/.rvm/gemsets/global.gems \
  && echo 'rvm_silence_path_mismatch_check_flag=1' >> ~/.rvmrc
 
-SHELL ["/bin/bash", "-lc"]
-CMD ["/bin/bash", "-l"]
+EVN RUBY_VERSION
 
-ARG ruby_version=2.7.1
-
-ENV RUBY_VERSION ${ruby_version}
-# Install Rubies
-RUN rvm install $RUBY_VERSION
+CMD ["rvm", "install", "$RUBY_VERSION"]
 
 # Set it back to USER jenkins - so we can use it as a Jenkins Slave
 
