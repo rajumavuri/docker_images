@@ -43,7 +43,7 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
 
 ENV RUBY_VERSION 2.7.1
 
-CMD ["rvm", "install", "$RUBY_VERSION"]
+CMD ["/bin/bash", "rvm", "install", "$RUBY_VERSION"]
 
 # Set it back to USER jenkins - so we can use it as a Jenkins Slave
 
