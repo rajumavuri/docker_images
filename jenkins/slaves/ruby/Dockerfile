@@ -10,20 +10,13 @@ RUN apt-get update \
       automake \
       bison \
       gawk \
-      sqlite3 \
       make \
-      imagemagick \
       libbz2-dev \
       libcurl4-openssl-dev \
       libevent-dev \
       libffi-dev \
       libgdbm-dev \
       libglib2.0-dev \
-      libgmp-dev \
-      libjpeg-dev \
-      libmagickcore-dev \
-      libmagickwand-dev \
-      libmysqlclient-dev \
       libncurses-dev \
       libpq-dev \
       libreadline-dev \
