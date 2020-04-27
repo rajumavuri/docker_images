@@ -41,7 +41,7 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
  && echo 'bundler' >> /home/jenkins/.rvm/gemsets/global.gems \
  && echo 'rvm_silence_path_mismatch_check_flag=1' >> ~/.rvmrc
 
-ENV RUBY_VERSION
+ENV RUBY_VERSION 2.7.1
 
 CMD ["rvm", "install", "$RUBY_VERSION"]
 
