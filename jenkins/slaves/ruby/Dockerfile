@@ -4,9 +4,43 @@ MAINTAINER rajumavuri@gmail.com
 # Sets USER to root - so I can install stuff below
 USER root
 
-RUN apt-get update
-RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
-RUN apt-get install -y build-essential
+RUN apt-get update \
+ && apt-get install -y \
+      autoconf \
+      automake \
+      bison \
+      gawk \
+      sqlite3 \
+      make \
+      imagemagick \
+      libbz2-dev \
+      libcurl4-openssl-dev \
+      libevent-dev \
+      libffi-dev \
+      libgdbm-dev \
+      libglib2.0-dev \
+      libgmp-dev \
+      libjpeg-dev \
+      libmagickcore-dev \
+      libmagickwand-dev \
+      libmysqlclient-dev \
+      libncurses-dev \
+      libpq-dev \
+      libreadline-dev \
+      libsqlite3-dev \
+      libssl-dev \
+      libxml2-dev \
+      libxslt-dev \
+      libyaml-dev \
+      zlib1g-dev \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
+
+USER docker
+
+# Install RVM
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
       409B6B1796C275462A1703113804BB82D39DC0E3 \
       7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
