@@ -41,10 +41,4 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
  && echo 'bundler' >> /home/jenkins/.rvm/gemsets/global.gems \
  && echo 'rvm_silence_path_mismatch_check_flag=1' >> ~/.rvmrc
 
-CMD ["/bin/bash", "-l"]
-
 # Set it back to USER jenkins - so we can use it as a Jenkins Slave
-
-
-
-
