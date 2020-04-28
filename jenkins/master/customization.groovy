@@ -6,8 +6,8 @@ import javaposse.jobdsl.plugin.GlobalJobDslSecurityConfiguration
 
 Jenkins.instance.setNumExecutors(5)
 
-def allStores = ["BBW6004", "BBW0025", "BBW0048", "VSS1521", "VSS2523", "VSS1607", "VSS0005", "VSS0023", "VSS0056", "VSS1748"]
-String agentHome = "C:\\jenkins"
+def allStores = ["ruby"]
+String agentHome = "/home/jenkins_home"
 String agentExecutors = "2"
 
 
@@ -28,5 +28,5 @@ allStores.each {
 
 // Disable Job DSL script approval
 
-GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
+GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=true
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
