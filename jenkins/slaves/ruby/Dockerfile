@@ -1,11 +1,13 @@
-FROM jenkins/jnlp-slave:latest
-MAINTAINER rajumavuri@gmail.com
+FROM jenkins/jnlp-slave:alpine as jnlp
 
-USER root
+FROM ruby:2-stretch
 
-RUN apt-get update
-RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
-RUN apt-get install -y build-essential
-RUN apt-get install -y ruby-full
+RUN apt-get update -qq && \
+    apt-get install -qy git openjdk-8-jre-headless && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-USER jenkins
+COPY --from=jnlp /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-agent
+COPY --from=jnlp /usr/share/jenkins/agent.jar /usr/share/jenkins/agent.jar
+
+ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
