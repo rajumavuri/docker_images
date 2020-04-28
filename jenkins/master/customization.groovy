@@ -24,6 +24,8 @@ allStores.each {
           RetentionStrategy.INSTANCE) // Is the "Availability" field and INSTANCE means "Always"
   Jenkins.instance.addNode(dumb)
   println "Agent '$it' created with $agentExecutors executors and home '$agentHome'"
+  File file = new File("/home/jenkins_home/"+it+".txt")
+  file.write jenkins.model.Jenkins.getInstance().getComputer(it).getJnlpMac()
   println it+ " : "+jenkins.model.Jenkins.getInstance().getComputer(it).getJnlpMac()
 }
 
