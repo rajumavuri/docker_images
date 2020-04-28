@@ -28,5 +28,5 @@ allStores.each {
 
 // Disable Job DSL script approval
 
-GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=true
-GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
+// GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=true
+// GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
