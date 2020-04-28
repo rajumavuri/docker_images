@@ -1,6 +1,7 @@
 import jenkins.model.*
 import hudson.model.Node.Mode
 import hudson.slaves.*
+import hudson.security.*
 import javaposse.jobdsl.plugin.GlobalJobDslSecurityConfiguration
 
 
@@ -28,5 +29,15 @@ allStores.each {
 
 // Disable Job DSL script approval
 
-// GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=true
-// GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
+GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=true
+GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
+
+// Enable Security Realm
+def instance = Jenkins.getInstance()
+def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+hudsonRealm.createAccount("admin","admin")
+instance.setSecurityRealm(hudsonRealm)
+def strategy = new GlobalMatrixAuthorizationStrategy()
+strategy.add(Jenkins.ADMINISTER, "admin")
+instance.setAuthorizationStrategy(strategy)
+instance.save()
