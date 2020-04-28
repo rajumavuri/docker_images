@@ -8,7 +8,7 @@ import javaposse.jobdsl.plugin.GlobalJobDslSecurityConfiguration
 Jenkins.instance.setNumExecutors(5)
 
 def allStores = ["ruby"]
-String agentHome = "/home/jenkins_home"
+String agentHome = "/var/jenkins_home"
 String agentExecutors = "2"
 
 
@@ -24,7 +24,7 @@ allStores.each {
           RetentionStrategy.INSTANCE) // Is the "Availability" field and INSTANCE means "Always"
   Jenkins.instance.addNode(dumb)
   println "Agent '$it' created with $agentExecutors executors and home '$agentHome'"
-  File file = new File("/home/jenkins_home/"+it+".txt")
+  File file = new File("/var/jenkins_home/"+it+".txt")
   file.write jenkins.model.Jenkins.getInstance().getComputer(it).getJnlpMac()
   println it+ " : "+jenkins.model.Jenkins.getInstance().getComputer(it).getJnlpMac()
 }
