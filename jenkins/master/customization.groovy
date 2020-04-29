@@ -13,14 +13,13 @@ String agentExecutors = "2"
 
 
 allNodes.each {
-    // There is a constructor that also takes a list of properties (env vars) at the end, but haven't needed that yet
   DumbSlave dumb = new DumbSlave(it,  // Agent name, usually matches the host computer's machine name
-          it,           // Agent description
+          it,                         // Agent description
           agentHome,                  // Workspace on the agent's computer
           agentExecutors,             // Number of executors
           Mode.EXCLUSIVE,             // "Usage" field, EXCLUSIVE is "only tied to node", NORMAL is "any"
           it,                         // Labels
-          new JNLPLauncher(true),         // Launch strategy, JNLP is the Java Web Start setting services use
+          new JNLPLauncher(true),     // Launch strategy, JNLP is the Java Web Start setting services use
           RetentionStrategy.INSTANCE) // Is the "Availability" field and INSTANCE means "Always"
   Jenkins.instance.addNode(dumb)
   println "Agent '$it' created with $agentExecutors executors and home '$agentHome'"
