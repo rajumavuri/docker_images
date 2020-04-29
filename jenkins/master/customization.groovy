@@ -7,7 +7,7 @@ import javaposse.jobdsl.plugin.GlobalJobDslSecurityConfiguration
 
 Jenkins.instance.setNumExecutors(5)
 
-def allStores = ["ruby"]
+def allStores = ["ruby","python"]
 String agentHome = "/var/jenkins_home"
 String agentExecutors = "2"
 
