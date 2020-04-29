@@ -1,6 +1,7 @@
-FROM jenkins/inbound-agent as jnlp
+# https://github.com/jenkinsci/jnlp-agents
+FROM jenkins/jnlp-slave:alpine as jnlp
 
-FROM python:3
+FROM ruby:2-stretch
 
 RUN apt-get update -qq && \
     apt-get install -qy git openjdk-8-jre-headless && \

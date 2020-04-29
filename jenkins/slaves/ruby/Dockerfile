@@ -1,3 +1,4 @@
+# https://github.com/jenkinsci/jnlp-agents
 FROM jenkins/inbound-agent as jnlp
 
 FROM ruby:2-stretch
