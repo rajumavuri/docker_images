@@ -30,9 +30,15 @@ allStores.each {
 }
 
 // Disable Job DSL script approval
-
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=true
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
+
+// Enable Security Realm
+def instance = Jenkins.getInstance()
+def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+hudsonRealm.createAccount("admin","admin")
+instance.setSecurityRealm(hudsonRealm)
+instance.save()
 
 // Enable Security Realm
 def instance = Jenkins.getInstance()
