@@ -4,13 +4,13 @@ import hudson.slaves.*
 import hudson.security.*
 import javaposse.jobdsl.plugin.GlobalJobDslSecurityConfiguration
 
-
+// Master node executors
 Jenkins.instance.setNumExecutors(5)
 
+// Creating nodes
 def allNodes = ["ruby1","ruby2","python1","maven1","maven2","maven3"]
 String agentHome = "/var/jenkins_home"
 String agentExecutors = "2"
-
 
 allNodes.each {
   DumbSlave dumb = new DumbSlave(it,  // Agent name, usually matches the host computer's machine name
