@@ -44,6 +44,7 @@ git pull origin master
 docker build -t jenkins ./jenkins/master
 docker build -t ruby_node ./jenkins/slaves/ruby
 docker build -t python_node ./jenkins/slaves/python
+docker build -t maven_node ./jenkins/slaves/maven
 
 # running jenkins docker
 docker run -d --name $JENKINS_MASTER --network $JENKINS_NETWORK -p $JENKINS_PORT:8080 -p 50000:50000 -v $JENKINS_VOLUME:/var/jenkins_home jenkins:latest
@@ -53,7 +54,7 @@ sleep 30
 
 # running nodes and attaching to master
 rm *.txt
-SLAVES=(ruby python)
+
 for slave in "${SLAVES[@]}"
 do
   docker cp $JENKINS_MASTER:/var/jenkins_home/"$slave".txt $PWD/"$slave".txt
@@ -62,15 +63,22 @@ do
   then
     echo DEPLOYING RUBY NODE
     docker run -d --name "$slave"_node --network $JENKINS_NETWORK \
-      -e JENKINS_URL=http://$JENKINS_MASTER:8080 \
+      -e JENKINS_URL=http://$JENKINS_MASTER:$JENKINS_PORT \
       -e JENKINS_SECRET=$token \
       -e JENKINS_AGENT_NAME=$slave ruby_node:latest
   elif [[ "$slave" =~ .*python.* ]]
   then
     echo DEPLOYING PYTHON NODE
     docker run -d --name "$slave"_node --network $JENKINS_NETWORK \
-      -e JENKINS_URL=http://$JENKINS_MASTER:8080 \
+      -e JENKINS_URL=http://$JENKINS_MASTER:$JENKINS_PORT \
       -e JENKINS_SECRET=$token \
       -e JENKINS_AGENT_NAME=$slave python_node:latest
+  elif [[ "$slave" =~ .*maven.* ]]
+  then
+    echo DEPLOYING MAVEN NODE
+    docker run -d --name "$slave"_node --network $JENKINS_NETWORK \
+      -e JENKINS_URL=http://$JENKINS_MASTER:$JENKINS_PORT \
+      -e JENKINS_SECRET=$token \
+      -e JENKINS_AGENT_NAME=$slave maven_node:latest
   fi
 done
