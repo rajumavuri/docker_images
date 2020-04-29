@@ -4,7 +4,7 @@ JENKINS_MASTER=jenkins-master
 JENKINS_PORT=8080
 JENKINS_VOLUME=jenkins_volume
 JENKINS_NETWORK=jenkins_network
-SLAVES=(ruby python)
+SLAVES=(ruby1 ruby2 python1 maven1 maven2 maven3)
 
 # check if jenkins master running and stop if it is and remove the container
 if docker ps | grep $JENKINS_MASTER > /dev/null; then
