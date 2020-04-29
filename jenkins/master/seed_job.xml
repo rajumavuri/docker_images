@@ -13,7 +13,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://TcoeAutoUser:TcoeAutoUser@stash.lbidts.com/scm/tcoea/pos-jenkins-dsl.git</url>
+        <url>https://github.com/rajumavuri/jenkins_dsl.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>

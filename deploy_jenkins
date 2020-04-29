@@ -59,23 +59,21 @@ for slave in "${SLAVES[@]}"
 do
   docker cp $JENKINS_MASTER:/var/jenkins_home/"$slave".txt $PWD/"$slave".txt
   token=`cat "$slave".txt`
+  echo "DEPLOYING $slave NODE"
   if [[ "$slave" =~ .*ruby.* ]]
   then
-    echo DEPLOYING RUBY NODE
     docker run -d --name "$slave"_node --network $JENKINS_NETWORK \
       -e JENKINS_URL=http://$JENKINS_MASTER:$JENKINS_PORT \
       -e JENKINS_SECRET=$token \
       -e JENKINS_AGENT_NAME=$slave ruby_node:latest
   elif [[ "$slave" =~ .*python.* ]]
   then
-    echo DEPLOYING PYTHON NODE
     docker run -d --name "$slave"_node --network $JENKINS_NETWORK \
       -e JENKINS_URL=http://$JENKINS_MASTER:$JENKINS_PORT \
       -e JENKINS_SECRET=$token \
       -e JENKINS_AGENT_NAME=$slave python_node:latest
   elif [[ "$slave" =~ .*maven.* ]]
   then
-    echo DEPLOYING MAVEN NODE
     docker run -d --name "$slave"_node --network $JENKINS_NETWORK \
       -e JENKINS_URL=http://$JENKINS_MASTER:$JENKINS_PORT \
       -e JENKINS_SECRET=$token \
