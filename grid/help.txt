@@ -1,0 +1,2 @@
+docker-compose up --scale chrome-node=5 --scale firefox-node=3 --scale opera-node=1 -d
+
