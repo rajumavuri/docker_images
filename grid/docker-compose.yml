@@ -1,6 +1,6 @@
 # To execute this docker-compose yml file use `docker-compose -f <file_name> up`
 # Add the `-d` flag at the end for detached execution
-# docker-compose up --scale chrome-node=5 firefox-node=5 -d
+# docker-compose up --scale chrome-node=5 --scale firefox-node=3 --scale opera-node=1 -d
 version: "3"
 services:
   selenium-hub:
@@ -19,6 +19,15 @@ services:
       - HUB_PORT=4444
   firefox-node:
     image: selenium/node-firefox-debug
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+  opera-node:
+    image: selenium/node-opera-debug
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
